@@ -46,46 +46,38 @@ import torchvision.utils as vutils
 
 Two different preprocessing pipelines were used in two notebooks.
 
-ACGAN.ipynb
+### ACGAN.ipynb
 
-Images are resized directly to 128 × 128
+- Images are resized directly to **128 × 128**
+- Transformations:
+  - `RandomHorizontalFlip`
+  - `ToTensor`
+  - `Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])`
 
-Transformations:
+---
 
-RandomHorizontalFlip
+### fruit.ipynb
 
-ToTensor
+- Images are resized to **72 × 72**, then cropped using `RandomCrop(64)`
+- This introduces more **data augmentation**
+- Final image resolution: **64 × 64**
+- Transformations:
+  - `RandomHorizontalFlip`
+  - `ToTensor`
+  - `Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])`
 
-Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
-
-fruit.ipynb
-
-Images are resized to 72 × 72, then cropped using RandomCrop(64)
-
-This introduces more data augmentation
-
-Final image resolution: 64 × 64
-
-Transformations:
-
-RandomHorizontalFlip
-
-ToTensor
-
-Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
+---
 
 ## 5. Comparison of Preprocessing Strategies
 
-ACGAN.ipynb
+- **ACGAN.ipynb**
+  - Simple resizing
+  - Higher resolution (**128 × 128**)
 
-Simple resizing
+- **fruit.ipynb**
+  - Resize + RandomCrop for increased data diversity
+  - Lower final resolution (**64 × 64**)
+  - Stronger data augmentation
 
-Higher resolution (128 × 128)
+---
 
-fruit.ipynb
-
-Resize + RandomCrop for increased data diversity
-
-Lower final resolution (64 × 64)
-
-Stronger data augmentation
