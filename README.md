@@ -1,28 +1,38 @@
-Project
+# UV IMDA Project
 
-Image Generation from Labels (ACGAN)
-1. Dataset
+## Image Generation from Labels using ACGAN
 
-Original Dataset:
-Fruits Dataset from Kaggle
-https://www.kaggle.com/datasets/moltean/fruits
+---
 
-Since each class in the original dataset contained only around 500 images, we merged classes corresponding to the same fruit.
+## 1. Dataset
 
-After preprocessing, we selected 11 fruit categories, each containing approximately 1,100 images.
+### Original Dataset
+Fruits Dataset (Kaggle):  
+https://www.kaggle.com/datasets/moltean/fruits  
 
-Preprocessed Dataset (Final Version):
-https://drive.google.com/drive/folders/1J037ySeZ0z3Ljbr_USWy1OaDhRrRUrtB?usp=sharing
+Each class in the original dataset contained only about **500 images**.  
+To address this limitation, we merged classes corresponding to the **same fruit**.
 
-2. Model
+After preprocessing, we selected **11 fruit categories**, with approximately **1,100 images per category**.
 
-Model used: ACGAN (Auxiliary Classifier GAN)
+### Preprocessed Dataset
+The final preprocessed dataset is available at:  
+https://drive.google.com/drive/folders/1J037ySeZ0z3Ljbr_USWy1OaDhRrRUrtB?usp=sharing  
 
-Version: Basic / baseline implementation
+---
 
-This version is finally used to visualize and evaluate the best results.
+## 2. Model
 
-3. Environment & Imports
+- **Model:** ACGAN (Auxiliary Classifier GAN)
+- **Version:** Basic / baseline implementation  
+
+This version is used to visualize and evaluate the best generated results.
+
+---
+
+## 3. Environment & Imports
+
+```python
 import os
 import torch
 import torch.nn as nn
@@ -32,13 +42,13 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 import torchvision.utils as vutils
 
-4. Data Preprocessing & Image Size
+## 4. Data Preprocessing & Image Size
 
-We experimented with two different preprocessing pipelines in two notebooks:
+Two different preprocessing pipelines were used in two notebooks.
 
 ACGAN.ipynb
 
-Resize images directly to 128 × 128
+Images are resized directly to 128 × 128
 
 Transformations:
 
@@ -50,7 +60,7 @@ Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 
 fruit.ipynb
 
-Resize images to 72 × 72, then apply RandomCrop(64)
+Images are resized to 72 × 72, then cropped using RandomCrop(64)
 
 This introduces more data augmentation
 
@@ -64,7 +74,7 @@ ToTensor
 
 Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 
-5. Key Differences Between the Two Approaches
+## 5. Comparison of Preprocessing Strategies
 
 ACGAN.ipynb
 
@@ -74,7 +84,7 @@ Higher resolution (128 × 128)
 
 fruit.ipynb
 
-Resize + RandomCrop for greater data diversity
+Resize + RandomCrop for increased data diversity
 
 Lower final resolution (64 × 64)
 
